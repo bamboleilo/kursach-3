@@ -1,18 +1,14 @@
-import requests
 from datetime import datetime
+import json
 
 
-def get_data(url):
+def get_data(filename):
     '''
-    Функция получает список словарей из нужного url запроса
+    Функция получает список словарей из нужного файла
     '''
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            return response.json(), "INFO: Данные получены успешно!"
-        return None, f"WARNING: Статус ответа {response.status_code}"
-    except requests.exceptions.ConnectionError:
-        return None, "ERROR: requests.exceptions.ConnectionError"
+    with open(filename, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+        return data, "INFO: Данные получены успешно!"
 
 
 def get_filtered_data(data, filtered_empty_from=False):

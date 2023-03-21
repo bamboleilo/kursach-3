@@ -1,27 +1,5 @@
 import pytest
-import requests.exceptions
-
 from utils import get_data, get_filtered_data, get_last_data, get_formatted_data
-
-
-def test_get_data():
-    '''
-    Тест на проверку соединения:
-        - успешно;
-        - синтаксическая ошибка;
-        - ошибка соединения.
-    '''
-    url = "https://file.notion.so/f/s/d22c7143-d55e-4f1d-aa98-e9b15e5e5efc/operations.json?spaceId=0771f0bb-b4cb-4a14-bc05-94cbd33fc70d&table=block&id=f11058ed-10ad-42ea-a13d-aad1945e5421&expirationTimestamp=1679361416440&signature=9nd2eY3JRxxqr2v_h4xNYfZ7gClYMdteQr23vZzRNb0&downloadName=operations.json"
-    assert get_data(url) is not None
-    url = "https://file.notion.so/f/s/d22c7143-d55e-4f1d-aa98-e9b15e5e5efc/operations.json?spaceId=0771f0bb-b4cb-4a14-bc05-94cbd33fc70d&table=block&id=f11058ed-10ad-42ea-a13d-aad1945e5421&expirationTimestamp=1679361416440&signature=9nd2eY3JRxxqr2v_h4xNYfZ7gClYMdteQr23vZzRNb0&downloadName=operation.json"
-    data, info = get_data(url)
-    assert data is None
-    assert info == "WARNING: Статус ответа 400"
-    url = "https://fil.notion.so/f/s/d22c7143-d55e-4f1d-aa98-e9b15e5e5efc/operations.json?spaceId=0771f0bb-b4cb-4a14-bc05-94cbd33fc70d&table=block&id=f11058ed-10ad-42ea-a13d-aad1945e5421&expirationTimestamp=1679361416440&signature=9nd2eY3JRxxqr2v_h4xNYfZ7gClYMdteQr23vZzRNb0&downloadName=operations.json"
-    data, info = get_data(url)
-    assert data is None
-    assert info == "ERROR: requests.exceptions.ConnectionError"
-
 
 def test_get_filtered_data(test_data):
     '''
